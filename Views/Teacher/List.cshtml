@@ -1,0 +1,17 @@
+﻿
+@model IEnumerable<CumulativeProject2.Models.Teacher>
+@{
+    ViewBag.Title = "List of teachers";
+}
+
+<div id="containerList">
+    <h2>List of Teachers</h2>
+    <form action="/Teacher/List" method="GET">
+        <input type="text" name="SearchKey" />
+        <input type="submit" value="Search" />
+    </form>
+    @foreach (var teacher in Model)
+    {
+        <div><a href="/Teacher/Show/@teacher.TeacherId">@teacher.TeacherFname @teacher.TeacherLname</a></div>
+    }
+</div>
