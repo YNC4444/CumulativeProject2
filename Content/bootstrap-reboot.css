@@ -299,6 +299,7 @@ figure {
 
 img,
 svg {
+    max-width: 300px;
   vertical-align: middle;
 }
 

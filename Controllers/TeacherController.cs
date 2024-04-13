@@ -1,6 +1,7 @@
 ﻿using CumulativeProject2.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -33,6 +34,39 @@ namespace CumulativeProject2.Controllers
             Teacher NewTeacher = controller.findTeacher(id);
 
             return View(NewTeacher);
+        }
+
+        //POST : /Teacher/Delete/{id}
+        public ActionResult Delete(int id)
+        {
+            TeacherDataController controller = new TeacherDataController(); 
+            controller.DeleteTeacher(id);
+            return RedirectToAction("List");
+        }
+
+        //GET : /Teacher/New
+        public ActionResult New()
+        {
+            return View();
+        }
+
+        //POST : /Teacher/Create
+        [HttpPost]
+        public ActionResult Create(string TeacherFname, string TeacherLname, int TeacherId, string EmployeeNumber, DateTime HireDate, decimal Salary )
+        {
+            //identify the method is running
+            //identify the inputs provided from the form
+
+            Debug.WriteLine("I have accessed the Create Method");
+            Debug.WriteLine(TeacherFname);
+            Debug.WriteLine(TeacherLname);
+            Debug.WriteLine(TeacherId);
+            Debug.WriteLine(EmployeeNumber);
+            Debug.WriteLine(HireDate);
+            Debug.WriteLine(Salary);
+
+
+            return RedirectToAction("List");
         }
     }
 }

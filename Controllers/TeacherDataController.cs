@@ -141,5 +141,33 @@ namespace CumulativeProject2.Controllers
 
             return NewTeacher;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <example> POST : /api/TeacherData/DeleteTeacher/3 </example>
+        [HttpPost]
+        public void DeleteTeacher(int id)
+        {
+            // Create an instance of a connection
+            MySqlConnection Conn = School.AccessDatabase();
+
+            // Open the connection between the web server & the database
+            Conn.Open();
+
+            // Make a new command/query for the database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            // SQL query
+            cmd.CommandText = "Delete from Teachers where teacherid=@id";
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
+        }
+
     }
 }
