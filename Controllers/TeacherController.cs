@@ -65,6 +65,16 @@ namespace CumulativeProject2.Controllers
             Debug.WriteLine(HireDate);
             Debug.WriteLine(Salary);
 
+            Teacher NewTeacher = new Teacher();
+            NewTeacher.TeacherFname = TeacherFname;
+            NewTeacher.TeacherLname = TeacherLname;
+            NewTeacher.TeacherId = TeacherId;
+            NewTeacher.EmployeeNumber = EmployeeNumber;
+            NewTeacher.HireDate = HireDate;
+            NewTeacher.Salary = Salary;
+
+            TeacherDataController controller = new TeacherDataController();
+            controller.AddTeacher(NewTeacher);
 
             return RedirectToAction("List");
         }

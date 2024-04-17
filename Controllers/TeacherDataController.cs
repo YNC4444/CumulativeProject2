@@ -169,5 +169,32 @@ namespace CumulativeProject2.Controllers
             Conn.Close();
         }
 
+        [HttpPost]
+        public void AddTeacher([FromBody] Teacher NewTeacher)
+        {
+            // Create an instance of a connection
+            MySqlConnection Conn = School.AccessDatabase();
+
+            // Open the connection between the web server & the database
+            Conn.Open();
+
+            // Make a new command/query for the database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            // SQL query
+            cmd.CommandText = "insert into teachers (teacherfname, teacherlname, teacherid, employeenumber, hiredate, salary) values (@TeacherFname,@TeacherLname,@TeacherId,@EmployeeNumber,@HireDate,@Salary)";
+            cmd.Parameters.AddWithValue("@TeacherFname", NewTeacher.TeacherFname);
+            cmd.Parameters.AddWithValue("@TeacherLname", NewTeacher.TeacherLname);
+            cmd.Parameters.AddWithValue("@TeacherId", NewTeacher.TeacherId);
+            cmd.Parameters.AddWithValue("@EmployeeNumber", NewTeacher.EmployeeNumber);
+            cmd.Parameters.AddWithValue("@HireDate", NewTeacher.HireDate);
+            cmd.Parameters.AddWithValue("@Salary", NewTeacher.Salary);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
+        }
+
     }
 }
